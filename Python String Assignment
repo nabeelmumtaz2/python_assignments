@@ -1,0 +1,31 @@
+import re
+
+
+# Make regex available in the program
+
+def readfile():
+    # Open and read a text file
+    file_name = "A3 Codes.txt";
+    f = open(file_name, "r")
+    return f
+
+
+def readcodes(f):
+    """
+   Verify and validate each code received from the text file based on the requirements such
+   as code should be 10 or more characters long in length, position 4 through 7
+   should be a number and a letter in the 10 positions should be an upper case letter.
+    """
+    for x in f:
+        if len(x) >= 10 and re.search("^[0-9]+$", x[3:7]) and re.search("[A-Z]", x[9]):
+            print(x, "Valid Code(s)")
+    #If letter equal (R) and country code equal (2000) or greater then output the string invalid restricted code.
+            if x[9] == "R" and int(x[3:7]) >= 2000:
+                print(x, "Invalid Restricted Code(s)", x[3:7])
+        else:
+            print(x, "Invalid Code(s)")
+
+
+r = readfile()
+readcodes(r)
+input('Press ENTER to exit')
